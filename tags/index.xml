@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on 人生如逆旅，我亦是行人。</title>
+    <link>https://xiking.win/tags/</link>
+    <description>Recent content in Tags on 人生如逆旅，我亦是行人。</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>yongman</copyright>
+    <lastBuildDate>Thu, 18 Jul 2019 16:28:13 +0800</lastBuildDate>
+    
+	<atom:link href="https://xiking.win/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ci</title>
+      <link>https://xiking.win/tags/ci/</link>
+      <pubDate>Thu, 18 Jul 2019 16:28:13 +0800</pubDate>
+      
+      <guid>https://xiking.win/tags/ci/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gitlab</title>
+      <link>https://xiking.win/tags/gitlab/</link>
+      <pubDate>Thu, 18 Jul 2019 16:28:13 +0800</pubDate>
+      
+      <guid>https://xiking.win/tags/gitlab/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hexo</title>
+      <link>https://xiking.win/tags/hexo/</link>
+      <pubDate>Thu, 18 Jul 2019 16:28:13 +0800</pubDate>
+      
+      <guid>https://xiking.win/tags/hexo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>https://xiking.win/tags/hugo/</link>
+      <pubDate>Thu, 18 Jul 2019 16:28:13 +0800</pubDate>
+      
+      <guid>https://xiking.win/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>RocksDB</title>
+      <link>https://xiking.win/tags/rocksdb/</link>
+      <pubDate>Wed, 05 Dec 2018 17:58:49 +0000</pubDate>
+      
+      <guid>https://xiking.win/tags/rocksdb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>homeassistant</title>
+      <link>https://xiking.win/tags/homeassistant/</link>
+      <pubDate>Thu, 15 Nov 2018 01:27:53 +0000</pubDate>
+      
+      <guid>https://xiking.win/tags/homeassistant/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>synology</title>
+      <link>https://xiking.win/tags/synology/</link>
+      <pubDate>Thu, 15 Nov 2018 01:27:53 +0000</pubDate>
+      
+      <guid>https://xiking.win/tags/synology/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

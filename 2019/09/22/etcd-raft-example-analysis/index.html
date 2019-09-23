@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>技术记录 · 人生如逆旅，我亦是行人。</title>
+  <title>etcd raft lib使用示例分析 - 人生如逆旅，我亦是行人。</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -23,7 +23,8 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="yongman" />
-  <meta name="description" content="人生如逆旅，我亦是行人。" />
+  <meta name="description" content="此前使用hashicorp raft库简单实现了一个redis协议的kv存储Leto，介绍文章。 当时选择hashicorp raft库，包装好，" />
+
   <meta name="keywords" content="yongman, 思考, 人生, 技术" />
 
 
@@ -34,8 +35,7 @@
 <meta name="generator" content="Hugo 0.55.6" />
 
 
-<link rel="canonical" href="https://xiking.win/categories/%E6%8A%80%E6%9C%AF%E8%AE%B0%E5%BD%95/" />
-<link href="%7balternate%20%7bRSS%20application/rss&#43;xml%20%20index%20alternate%20%20false%20false%20true%20false%20false%200%7d%20/categories/%E6%8A%80%E6%9C%AF%E8%AE%B0%E5%BD%95/index.xml%20https://xiking.win/categories/%E6%8A%80%E6%9C%AF%E8%AE%B0%E5%BD%95/index.xml%7d" rel="alternate" type="application/rss+xml" title="人生如逆旅，我亦是行人。" />
+<link rel="canonical" href="https://xiking.win/2019/09/22/etcd-raft-example-analysis/" />
 
 
 
@@ -59,19 +59,27 @@
 <link rel="stylesheet" href="/css/custom.css">
 
 
-<meta property="og:title" content="技术记录" />
-<meta property="og:description" content="人生如逆旅，我亦是行人。" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://xiking.win/categories/%E6%8A%80%E6%9C%AF%E8%AE%B0%E5%BD%95/" />
+<meta property="og:title" content="etcd raft lib使用示例分析" />
+<meta property="og:description" content="此前使用hashicorp raft库简单实现了一个redis协议的kv存储Leto，介绍文章。 当时选择hashicorp raft库，包装好，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://xiking.win/2019/09/22/etcd-raft-example-analysis/" />
+<meta property="article:published_time" content="2019-09-22T21:00:38&#43;00:00"/>
+<meta property="article:modified_time" content="2019-09-22T21:00:38&#43;00:00"/>
 
-<meta property="og:updated_time" content="2019-09-22T21:00:38&#43;00:00"/>
+<meta itemprop="name" content="etcd raft lib使用示例分析">
+<meta itemprop="description" content="此前使用hashicorp raft库简单实现了一个redis协议的kv存储Leto，介绍文章。 当时选择hashicorp raft库，包装好，">
 
-<meta itemprop="name" content="技术记录">
-<meta itemprop="description" content="人生如逆旅，我亦是行人。">
 
+<meta itemprop="datePublished" content="2019-09-22T21:00:38&#43;00:00" />
+<meta itemprop="dateModified" content="2019-09-22T21:00:38&#43;00:00" />
+<meta itemprop="wordCount" content="1518">
+
+
+
+<meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="技术记录"/>
-<meta name="twitter:description" content="人生如逆旅，我亦是行人。"/>
+<meta name="twitter:title" content="etcd raft lib使用示例分析"/>
+<meta name="twitter:description" content="此前使用hashicorp raft库简单实现了一个redis协议的kv存储Leto，介绍文章。 当时选择hashicorp raft库，包装好，"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -296,127 +304,320 @@ var _hmt = _hmt || [];
     <main id="main" class="main bg-llight">
       <div class="content-wrapper">
         <div id="content" class="content container">
-          
-
-<section id="archive" class="archive">
-  
+          <article class="post bg-white">
     
-      <div class="archive-title category">
-        <h2 class="archive-name">Category: 技术记录</h2>
+    <header class="post-header">
+      <h1 class="post-title">etcd raft lib使用示例分析</h1>
+      
+      <div class="post-meta">
+        <time datetime="2019-09-22" class="post-time">
+          2019-09-22
+        </time>
+        <div class="post-category">
+            <a href="https://xiking.win/categories/%E6%8A%80%E6%9C%AF%E8%AE%B0%E5%BD%95/"> 技术记录 </a>
+            
+          </div>
+        
+
+        
+        
+
+        
+        
       </div>
+    </header>
+
     
-  
+    
 
-  
-    <div class="archive-post">
-      <time datetime="2019-09-22" class="archive-post-time">
-        2019-09-22
-      </time>
-      <span class="archive-post-title">
-        <a href="/2019/09/22/etcd-raft-example-analysis/" class="archive-post-link">
-          etcd raft lib使用示例分析
-        </a>
-      </span>
+    
+    <div class="post-content">
+      
+
+<p>此前使用hashicorp raft库简单实现了一个redis协议的kv存储<a href="https://github.com/yongman/leto">Leto</a>，<a href="https://xiking.win/2018/07/30/implement-key-value-store-using-raft/">介绍文章</a>。</p>
+
+<p>当时选择hashicorp raft库，包装好，对用户暴露的细节较少，上手使用简单；而看了etc的raft库的实例，对外暴露的细节较多，多个channel交互，只提供核心的raft算法，其余的操作需要自己动手实现，包括网络传输、存储等，在使用上也更方便需求定制实现。</p>
+
+<p>看到很多raft库的工程实现或者库的引用，选择etcd raft库的占多数。比如k8s，tikv等。</p>
+
+<h4 id="如何使用etcd-raft库">如何使用etcd raft库</h4>
+
+<p>raftexample就是一个最简单的使用示例，它实现的是一个简单的内存kv存储，通过HTTP API访问。</p>
+
+<ol>
+<li>初始化</li>
+</ol>
+
+<p>由于raft库只实现核心逻辑，所以需要与应用进行交互。其交互采用4个channel：</p>
+
+<ul>
+<li>proposeC：用户代码向raft提交写请求Propose</li>
+<li>confChangeC：用户代码向raft提交配置变更请求ProposeConfChange</li>
+<li>commitC：用于raft向用户代码传输已经提交的entries，用户raft库暴露具体业务逻辑，将数据写入<code>State Machine</code></li>
+<li>errorC：向用户代码暴露raft库的处理异常</li>
+</ul>
+
+<p>其中proposeC和confChangeC是在开始手动创建，作为参数传递给raft组件。</p>
+
+<p>commitC和errorC是用户代码手动封装raftNode时创建的channel，并在raft组件中使用。</p>
+
+<pre><code class="language-go">func newRaftNode(id int, peers []string, join bool, getSnapshot func() ([]byte, error), proposeC &lt;-chan string,
+	confChangeC &lt;-chan raftpb.ConfChange) (&lt;-chan *string, &lt;-chan error, &lt;-chan *snap.Snapshotter) {
+
+	commitC := make(chan *string)
+	errorC := make(chan error)
+
+	rc := &amp;raftNode{
+		proposeC:    proposeC,
+		confChangeC: confChangeC,
+		commitC:     commitC,
+		errorC:      errorC,
+		id:          id,
+		peers:       peers,
+		join:        join,
+		waldir:      fmt.Sprintf(&quot;raftexample-%d&quot;, id),
+		snapdir:     fmt.Sprintf(&quot;raftexample-%d-snap&quot;, id),
+		getSnapshot: getSnapshot,
+		snapCount:   defaultSnapshotCount,
+		stopc:       make(chan struct{}),
+
+		snapshotterReady: make(chan *snap.Snapshotter, 1),
+	}
+	go rc.startRaft()
+	return commitC, errorC, rc.snapshotterReady
+}
+</code></pre>
+
+<ol>
+<li>启动raftNode</li>
+</ol>
+
+<p>在初始化的时候通过<code>rc.startRaft()</code>启动raft组件。</p>
+
+<pre><code class="language-go">func (rc *raftNode) startRaft() {
+	rc.snapshotter = snap.New(zap.NewExample(), rc.snapdir)
+	rc.snapshotterReady &lt;- rc.snapshotter
+
+	oldwal := wal.Exist(rc.waldir)
+	rc.wal = rc.replayWAL()
+
+	rpeers := make([]raft.Peer, len(rc.peers))
+	for i := range rpeers {
+		rpeers[i] = raft.Peer{ID: uint64(i + 1)}
+	}
+	c := &amp;raft.Config{
+		ID:                        uint64(rc.id),
+		ElectionTick:              10,
+		HeartbeatTick:             1,
+		Storage:                   rc.raftStorage,
+		MaxSizePerMsg:             1024 * 1024,
+		MaxInflightMsgs:           256,
+		MaxUncommittedEntriesSize: 1 &lt;&lt; 30,
+	}
+
+	if oldwal {
+		rc.node = raft.RestartNode(c)
+	} else {
+		startPeers := rpeers
+		if rc.join {
+			startPeers = nil
+		}
+		rc.node = raft.StartNode(c, startPeers)
+	}
+
+	rc.transport = &amp;rafthttp.Transport{
+		Logger:      zap.NewExample(),
+		ID:          types.ID(rc.id),
+		ClusterID:   0x1000,
+		Raft:        rc,
+		ServerStats: stats.NewServerStats(&quot;&quot;, &quot;&quot;),
+		LeaderStats: stats.NewLeaderStats(strconv.Itoa(rc.id)),
+		ErrorC:      make(chan error),
+	}
+
+	rc.transport.Start()
+	for i := range rc.peers {
+		if i+1 != rc.id {
+			rc.transport.AddPeer(types.ID(i+1), []string{rc.peers[i]})
+		}
+	}
+
+	go rc.serveRaft()
+	go rc.serveChannels()
+}
+</code></pre>
+
+<p>启动raft组件、创建网络传输、开始监听连接、监听channel数据。</p>
+
+<p>其中serverChannel完成了核心逻辑，读取用户提交数据，提交给raft node处理，并且将entries持久化、同步给peer节点，然后将已经commit成功的entries写入commitC。</p>
+
+<pre><code class="language-go">func (rc *raftNode) serveChannels() {
+	snap, err := rc.raftStorage.Snapshot()
+	if err != nil {
+		panic(err)
+	}
+	rc.confState = snap.Metadata.ConfState
+	rc.snapshotIndex = snap.Metadata.Index
+	rc.appliedIndex = snap.Metadata.Index
+
+	defer rc.wal.Close()
+
+	ticker := time.NewTicker(100 * time.Millisecond)
+	defer ticker.Stop()
+
+	// send proposals over raft
+	go func() {
+		confChangeCount := uint64(0)
+
+		for rc.proposeC != nil &amp;&amp; rc.confChangeC != nil {
+			select {
+			case prop, ok := &lt;-rc.proposeC:
+				if !ok {
+					rc.proposeC = nil
+				} else {
+					// blocks until accepted by raft state machine
+					rc.node.Propose(context.TODO(), []byte(prop))
+				}
+
+			case cc, ok := &lt;-rc.confChangeC:
+				if !ok {
+					rc.confChangeC = nil
+				} else {
+					confChangeCount++
+					cc.ID = confChangeCount
+					rc.node.ProposeConfChange(context.TODO(), cc)
+				}
+			}
+		}
+		// client closed channel; shutdown raft if not already
+		close(rc.stopc)
+	}()
+
+	// event loop on raft state machine updates
+	for {
+		select {
+		case &lt;-ticker.C:
+			rc.node.Tick()
+
+		// store raft entries to wal, then publish over commit channel
+		case rd := &lt;-rc.node.Ready():
+			rc.wal.Save(rd.HardState, rd.Entries)
+...
+			rc.raftStorage.Append(rd.Entries)
+			rc.transport.Send(rd.Messages)
+			if ok := rc.publishEntries(rc.entriesToApply(rd.CommittedEntries)); !ok {
+				rc.stop()
+				return
+			}
+			rc.maybeTriggerSnapshot()
+			rc.node.Advance()
+
+		case err := &lt;-rc.transport.ErrorC:
+			rc.writeError(err)
+			return
+
+		case &lt;-rc.stopc:
+			rc.stop()
+			return
+		}
+	}
+}
+</code></pre>
+
+<p>通过监听commitC中的数据，最后完成数据写入状态机。</p>
+
+<ol>
+<li>数据写入</li>
+</ol>
+
+<p>整个的数据写入过程：</p>
+
+<ul>
+<li>http api请求写入proposeC，监听到proposeC中有数据，将数据提交给raft</li>
+<li>当raft处理完成后通过Ready chan将请求交给用户代码继续处理，完成wal、entries持久化和entries发送给peer，查找是否有已经commit的entries，将commit的entries写入commitC</li>
+<li>用户代码通过从commitC中读取已经提交成功的数据，可以放心的将数据写入状态机。</li>
+</ul>
+
+<p>raftexample中kvstore的具体写入逻辑：</p>
+
+<pre><code class="language-go">func (s *kvstore) readCommits(commitC &lt;-chan *string, errorC &lt;-chan error) {
+	for data := range commitC {
+		...
+		var dataKv kv
+		dec := gob.NewDecoder(bytes.NewBufferString(*data))
+		if err := dec.Decode(&amp;dataKv); err != nil {
+			log.Fatalf(&quot;raftexample: could not decode message (%v)&quot;, err)
+		}
+		s.mu.Lock()
+		s.kvStore[dataKv.Key] = dataKv.Val
+		s.mu.Unlock()
+	}
+	if err, ok := &lt;-errorC; ok {
+		log.Fatal(err)
+	}
+}
+</code></pre>
+
+<p>至此完成数据写入。这里只是etcd raft库的简单使用，后续会深入阅读raft库的实现。</p>
+
+<p><strong>参考</strong></p>
+
+<ol>
+<li><a href="https://xiking.win/2018/07/30/implement-key-value-store-using-raft/">https://xiking.win/2018/07/30/implement-key-value-store-using-raft/</a></li>
+<li><a href="https://github.com/etcd-io/etcd/tree/master/contrib/raftexample">https://github.com/etcd-io/etcd/tree/master/contrib/raftexample</a></li>
+<li><a href="https://studygolang.com/articles/10287">https://studygolang.com/articles/10287</a></li>
+</ol>
+
     </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">yongman</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+      2019-09-22
+      
+    </span>
+  </p>
   
-    <div class="archive-post">
-      <time datetime="2019-04-25" class="archive-post-time">
-        2019-04-25
-      </time>
-      <span class="archive-post-title">
-        <a href="/2019/04/25/a-glibc-malloc-scenario/" class="archive-post-link">
-          一个glibc内存分配场景分析
-        </a>
-      </span>
-    </div>
-  
-    <div class="archive-post">
-      <time datetime="2019-03-28" class="archive-post-time">
-        2019-03-28
-      </time>
-      <span class="archive-post-title">
-        <a href="/2019/03/28/imgur-to-github-images-bed/" class="archive-post-link">
-          imgur图床迁移github图床
-        </a>
-      </span>
-    </div>
-  
-    <div class="archive-post">
-      <time datetime="2019-03-27" class="archive-post-time">
-        2019-03-27
-      </time>
-      <span class="archive-post-title">
-        <a href="/2019/03/27/dns-cache-pollution/" class="archive-post-link">
-          DNS劫持和污染原理
-        </a>
-      </span>
-    </div>
-  
-    <div class="archive-post">
-      <time datetime="2018-11-06" class="archive-post-time">
-        2018-11-06
-      </time>
-      <span class="archive-post-title">
-        <a href="/2018/11/06/load-balancer-learn/" class="archive-post-link">
-          了解负载均衡
-        </a>
-      </span>
-    </div>
-  
-    <div class="archive-post">
-      <time datetime="2018-08-14" class="archive-post-time">
-        2018-08-14
-      </time>
-      <span class="archive-post-title">
-        <a href="/2018/08/14/implicit-declaration-of-function/" class="archive-post-link">
-          函数隐式声明 implicit declaration of function
-        </a>
-      </span>
-    </div>
-  
-    <div class="archive-post">
-      <time datetime="2018-08-06" class="archive-post-time">
-        2018-08-06
-      </time>
-      <span class="archive-post-title">
-        <a href="/2018/08/06/forward-proxy-and-reverse-proxy/" class="archive-post-link">
-          正向代理和反向代理
-        </a>
-      </span>
-    </div>
-  
-    <div class="archive-post">
-      <time datetime="2018-07-13" class="archive-post-time">
-        2018-07-13
-      </time>
-      <span class="archive-post-title">
-        <a href="/2018/07/13/ssh-tunnel-proxy-and-port-forwarding/" class="archive-post-link">
-          SSH tunnel隧道网络穿透
-        </a>
-      </span>
-    </div>
-  
-    <div class="archive-post">
-      <time datetime="2018-07-05" class="archive-post-time">
-        2018-07-05
-      </time>
-      <span class="archive-post-title">
-        <a href="/2018/07/05/clean-github-sensitive-data-from-history/" class="archive-post-link">
-          清理git历史中的敏感信息
-        </a>
-      </span>
-    </div>
-  
-</section>
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
 
 
+    
+    
 
+    <footer class="post-footer">
+      
 
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/2019/07/18/hexo-to-hugo-with-gitlab-ci-github-pages/">
+            <span class="next-text nav-default">hexo迁移hugo并配置ci自动部署github pages</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
 
-
-  
-  
-  
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
 
   
   
@@ -425,14 +626,40 @@ var _hmt = _hmt || [];
   
 
   
-  
 
   
   
 
+  
 
+  
 
+  <div class="disqus-comment">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_config = function () {
+      this.page.url = "https://xiking.win/2019/09/22/etcd-raft-example-analysis/";
+    };
+    function load_disqus() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
 
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'xiking-win';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+
+    };
+    load_disqus();
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+  </noscript>
+  
+  </div>
+
+    
 
         </div>
       </div>

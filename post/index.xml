@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>yongman</copyright>
-    <lastBuildDate>Thu, 18 Jul 2019 16:28:13 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 22 Sep 2019 21:00:38 +0000</lastBuildDate>
     
 	<atom:link href="https://xiking.win/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>etcd raft lib使用示例分析</title>
+      <link>https://xiking.win/2019/09/22/etcd-raft-example-analysis/</link>
+      <pubDate>Sun, 22 Sep 2019 21:00:38 +0000</pubDate>
+      
+      <guid>https://xiking.win/2019/09/22/etcd-raft-example-analysis/</guid>
+      <description>此前使用hashicorp raft库简单实现了一个redis协议的kv存储Leto，介绍文章。 当时选择hashicorp raft库，包装好，</description>
+    </item>
     
     <item>
       <title>hexo迁移hugo并配置ci自动部署github pages</title>

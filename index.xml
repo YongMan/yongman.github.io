@@ -31,9 +31,7 @@
 
 &lt;p&gt;raftexample就是一个最简单的使用示例，它实现的是一个简单的内存kv存储，通过HTTP API访问。&lt;/p&gt;
 
-&lt;ol&gt;
-&lt;li&gt;初始化&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h5 id=&#34;1-初始化&#34;&gt;1. 初始化&lt;/h5&gt;
 
 &lt;p&gt;由于raft库只实现核心逻辑，所以需要与应用进行交互。其交互采用4个channel：&lt;/p&gt;
 
@@ -75,9 +73,7 @@
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;ol&gt;
-&lt;li&gt;启动raftNode&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h5 id=&#34;2-启动raftnode&#34;&gt;2. 启动raftNode&lt;/h5&gt;
 
 &lt;p&gt;在初始化的时候通过&lt;code&gt;rc.startRaft()&lt;/code&gt;启动raft组件。&lt;/p&gt;
 
@@ -213,9 +209,7 @@
 
 &lt;p&gt;通过监听commitC中的数据，最后完成数据写入状态机。&lt;/p&gt;
 
-&lt;ol&gt;
-&lt;li&gt;数据写入&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h5 id=&#34;3-数据写入&#34;&gt;3. 数据写入&lt;/h5&gt;
 
 &lt;p&gt;整个的数据写入过程：&lt;/p&gt;
 

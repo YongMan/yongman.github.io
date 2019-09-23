@@ -72,7 +72,7 @@
 
 <meta itemprop="datePublished" content="2019-09-22T21:00:38&#43;00:00" />
 <meta itemprop="dateModified" content="2019-09-22T21:00:38&#43;00:00" />
-<meta itemprop="wordCount" content="1518">
+<meta itemprop="wordCount" content="1521">
 
 
 
@@ -344,9 +344,7 @@ var _hmt = _hmt || [];
 
 <p>raftexample就是一个最简单的使用示例，它实现的是一个简单的内存kv存储，通过HTTP API访问。</p>
 
-<ol>
-<li>初始化</li>
-</ol>
+<h5 id="1-初始化">1. 初始化</h5>
 
 <p>由于raft库只实现核心逻辑，所以需要与应用进行交互。其交互采用4个channel：</p>
 
@@ -388,9 +386,7 @@ var _hmt = _hmt || [];
 }
 </code></pre>
 
-<ol>
-<li>启动raftNode</li>
-</ol>
+<h5 id="2-启动raftnode">2. 启动raftNode</h5>
 
 <p>在初始化的时候通过<code>rc.startRaft()</code>启动raft组件。</p>
 
@@ -526,9 +522,7 @@ var _hmt = _hmt || [];
 
 <p>通过监听commitC中的数据，最后完成数据写入状态机。</p>
 
-<ol>
-<li>数据写入</li>
-</ol>
+<h5 id="3-数据写入">3. 数据写入</h5>
 
 <p>整个的数据写入过程：</p>
 

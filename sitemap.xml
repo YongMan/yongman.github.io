@@ -3,14 +3,33 @@
   
   <url>
     <loc>https://xiking.win/categories/</loc>
-    <lastmod>2019-09-22T21:00:38+00:00</lastmod>
+    <lastmod>2020-01-15T17:53:38+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://xiking.win/post/</loc>
-    <lastmod>2019-09-22T21:00:38+00:00</lastmod>
+    <lastmod>2020-01-15T17:53:38+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiking.win/</loc>
+    <lastmod>2020-01-15T17:53:38+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiking.win/categories/%E5%AD%98%E5%82%A8/</loc>
+    <lastmod>2020-01-15T17:53:38+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiking.win/2020/01/15/snowflake-data-warehouse/</loc>
+    <lastmod>2020-01-15T17:53:38+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -18,12 +37,6 @@
     <lastmod>2019-09-22T21:00:38+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiking.win/</loc>
-    <lastmod>2019-09-22T21:00:38+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -134,12 +147,6 @@
     <lastmod>2018-12-05T17:58:49+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiking.win/categories/%E5%AD%98%E5%82%A8/</loc>
-    <lastmod>2018-12-05T17:58:49+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

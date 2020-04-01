@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>技术记录 · 人生如逆旅，我亦是行人。</title>
+  <title>再看Redis数据过期 - 人生如逆旅，我亦是行人。</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -23,7 +23,8 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="yongman" />
-  <meta name="description" content="人生如逆旅，我亦是行人。" />
+  <meta name="description" content="在Redis中，数据的过期可分为两种，一种是主动过期淘汰，一种是lazy方式淘汰。 主动过期淘汰就是在Redis中定时任务主动对数据进行采样，" />
+
   <meta name="keywords" content="yongman, 思考, 人生, 技术" />
 
 
@@ -34,8 +35,7 @@
 <meta name="generator" content="Hugo 0.55.6" />
 
 
-<link rel="canonical" href="https://xiking.win/categories/%E6%8A%80%E6%9C%AF%E8%AE%B0%E5%BD%95/" />
-<link href="%7balternate%20%7bRSS%20application/rss&#43;xml%20%20index%20alternate%20%20false%20false%20true%20false%20false%200%7d%20/categories/%E6%8A%80%E6%9C%AF%E8%AE%B0%E5%BD%95/index.xml%20https://xiking.win/categories/%E6%8A%80%E6%9C%AF%E8%AE%B0%E5%BD%95/index.xml%7d" rel="alternate" type="application/rss+xml" title="人生如逆旅，我亦是行人。" />
+<link rel="canonical" href="https://xiking.win/2020/04/01/redis-expire-key-review/" />
 
 
 
@@ -59,19 +59,27 @@
 <link rel="stylesheet" href="/css/custom.css">
 
 
-<meta property="og:title" content="技术记录" />
-<meta property="og:description" content="人生如逆旅，我亦是行人。" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://xiking.win/categories/%E6%8A%80%E6%9C%AF%E8%AE%B0%E5%BD%95/" />
+<meta property="og:title" content="再看Redis数据过期" />
+<meta property="og:description" content="在Redis中，数据的过期可分为两种，一种是主动过期淘汰，一种是lazy方式淘汰。 主动过期淘汰就是在Redis中定时任务主动对数据进行采样，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://xiking.win/2020/04/01/redis-expire-key-review/" />
+<meta property="article:published_time" content="2020-04-01T07:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2020-04-01T07:00:00&#43;00:00"/>
 
-<meta property="og:updated_time" content="2020-04-01T07:00:00&#43;00:00"/>
+<meta itemprop="name" content="再看Redis数据过期">
+<meta itemprop="description" content="在Redis中，数据的过期可分为两种，一种是主动过期淘汰，一种是lazy方式淘汰。 主动过期淘汰就是在Redis中定时任务主动对数据进行采样，">
 
-<meta itemprop="name" content="技术记录">
-<meta itemprop="description" content="人生如逆旅，我亦是行人。">
 
+<meta itemprop="datePublished" content="2020-04-01T07:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-04-01T07:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1064">
+
+
+
+<meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="技术记录"/>
-<meta name="twitter:description" content="人生如逆旅，我亦是行人。"/>
+<meta name="twitter:title" content="再看Redis数据过期"/>
+<meta name="twitter:description" content="在Redis中，数据的过期可分为两种，一种是主动过期淘汰，一种是lazy方式淘汰。 主动过期淘汰就是在Redis中定时任务主动对数据进行采样，"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -296,138 +304,124 @@ var _hmt = _hmt || [];
     <main id="main" class="main bg-llight">
       <div class="content-wrapper">
         <div id="content" class="content container">
-          
-
-<section id="archive" class="archive">
-  
+          <article class="post bg-white">
     
-      <div class="archive-title category">
-        <h2 class="archive-name">Category: 技术记录</h2>
+    <header class="post-header">
+      <h1 class="post-title">再看Redis数据过期</h1>
+      
+      <div class="post-meta">
+        <time datetime="2020-04-01" class="post-time">
+          2020-04-01
+        </time>
+        <div class="post-category">
+            <a href="https://xiking.win/categories/%E6%8A%80%E6%9C%AF%E8%AE%B0%E5%BD%95/"> 技术记录 </a>
+            
+          </div>
+        
+
+        
+        
+
+        
+        
       </div>
+    </header>
+
     
-  
+    
 
-  
-    <div class="archive-post">
-      <time datetime="2020-04-01" class="archive-post-time">
-        2020-04-01
-      </time>
-      <span class="archive-post-title">
-        <a href="/2020/04/01/redis-expire-key-review/" class="archive-post-link">
-          再看Redis数据过期
-        </a>
-      </span>
+    
+    <div class="post-content">
+      <p>在Redis中，数据的过期可分为两种，一种是主动过期淘汰，一种是lazy方式淘汰。</p>
+
+<ul>
+<li>主动过期淘汰就是在Redis中定时任务主动对数据进行采样，判断数据是否过期</li>
+<li>lazy淘汰就是在用户访问时，进行数据过期检查</li>
+</ul>
+
+<p>还有一种情况是，当数据达到内存上限后，会尝试根据内存淘汰策略强制对key进行删除。</p>
+
+<p>但是线上出现了一种比较奇怪的现象，在监控上查看最近几天的数据，master节点上的表现是在0点过后，数据会在10分钟内全部淘汰，key数量从4000+w淘汰到300w。</p>
+
+<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200401094825.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200401094702.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200401151312.png" alt="" /></p>
+
+<p>此时并没有达到Redis的最大内存限制，并没有发生强制key驱逐，如果是按正常的逻辑，发生这种大规模同时过期的场景可能会是：</p>
+
+<ol>
+<li>数据key设置了相同的过期时间，把前一天的数据全部过期，并且过期时间设置了一个统一或相近的时间。</li>
+<li>用户请求大量访问了已经过期的key，触发了数据的lazy过期检查，被动删除了过期的key。</li>
+</ol>
+
+<p>但是实例的qps是稳定下降的，并且总qps也没有达到上图中数据过期的速度。</p>
+
+<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200401095426.png" alt="" /></p>
+
+<p>如果是lazy方式触发，按当时的qps计算，10分钟最多能淘汰key数量：<code>5000*60*10=3000000</code>，无法达到10分钟内把4000w key过期的速度。</p>
+
+<p>真正的原因在于，在Redis的实现中，数据的主动过期虽然是定时任务中采样执行，但是会根据数据过期的不同场景触发不同定时任务执行。</p>
+
+<p>在Redis中，定时任务主动过期分为<code>ACTIVE_EXPIRE_CYCLE_FAST</code>和<code>ACTIVE_EXPIRE_CYCLE_SLOW</code>两种类型。</p>
+
+<p><code>SLOW</code>方式是通常的正常触发方式，其执行的时机是在<code>serverCron</code>时，<code>serverCron</code>以hz频率来执行， 默认情况下，在执行过程中，会以25% cpu的限制来执行，但是在单次采样过程中，会计算<code>实际过期key/采样key*100%</code>是否大于10，如果低于10，则跳出循环。</p>
+
+<p>而<code>FAST</code>方式是在有大量的过期key时，为了加快过期key的删除，采用的比较激进的主动过期方式，其执行周期在<code>beforeSleep</code>中，在每次事件aeMain循环中，都会尝试调用快速的数据过期检查，但是在数据过期比例不高于10%的情况下，会直接返回退出，不会继续进行快速数据过期检查。虽然可以看到，在这种方式下，每个调用迭代的时间限制在1ms左右，避免阻塞产生长耗时，但是在大流量的情况下，事件循环非常活跃，所以快速数据过期检查调用次数也会很频繁。</p>
+
+<p>所以如果key几乎设置了相同的过期时间，当过期时间来临，redis通过采样会发现大部分数据已经过期，会触发快速的数据过期，过期数据被及时清理。</p>
+
     </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">yongman</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+      2020-04-01
+      
+    </span>
+  </p>
   
-    <div class="archive-post">
-      <time datetime="2019-09-22" class="archive-post-time">
-        2019-09-22
-      </time>
-      <span class="archive-post-title">
-        <a href="/2019/09/22/etcd-raft-example-analysis/" class="archive-post-link">
-          etcd raft lib使用示例分析
-        </a>
-      </span>
-    </div>
-  
-    <div class="archive-post">
-      <time datetime="2019-04-25" class="archive-post-time">
-        2019-04-25
-      </time>
-      <span class="archive-post-title">
-        <a href="/2019/04/25/a-glibc-malloc-scenario/" class="archive-post-link">
-          一个glibc内存分配场景分析
-        </a>
-      </span>
-    </div>
-  
-    <div class="archive-post">
-      <time datetime="2019-03-28" class="archive-post-time">
-        2019-03-28
-      </time>
-      <span class="archive-post-title">
-        <a href="/2019/03/28/imgur-to-github-images-bed/" class="archive-post-link">
-          imgur图床迁移github图床
-        </a>
-      </span>
-    </div>
-  
-    <div class="archive-post">
-      <time datetime="2019-03-27" class="archive-post-time">
-        2019-03-27
-      </time>
-      <span class="archive-post-title">
-        <a href="/2019/03/27/dns-cache-pollution/" class="archive-post-link">
-          DNS劫持和污染原理
-        </a>
-      </span>
-    </div>
-  
-    <div class="archive-post">
-      <time datetime="2018-11-06" class="archive-post-time">
-        2018-11-06
-      </time>
-      <span class="archive-post-title">
-        <a href="/2018/11/06/load-balancer-learn/" class="archive-post-link">
-          了解负载均衡
-        </a>
-      </span>
-    </div>
-  
-    <div class="archive-post">
-      <time datetime="2018-08-14" class="archive-post-time">
-        2018-08-14
-      </time>
-      <span class="archive-post-title">
-        <a href="/2018/08/14/implicit-declaration-of-function/" class="archive-post-link">
-          函数隐式声明 implicit declaration of function
-        </a>
-      </span>
-    </div>
-  
-    <div class="archive-post">
-      <time datetime="2018-08-06" class="archive-post-time">
-        2018-08-06
-      </time>
-      <span class="archive-post-title">
-        <a href="/2018/08/06/forward-proxy-and-reverse-proxy/" class="archive-post-link">
-          正向代理和反向代理
-        </a>
-      </span>
-    </div>
-  
-    <div class="archive-post">
-      <time datetime="2018-07-13" class="archive-post-time">
-        2018-07-13
-      </time>
-      <span class="archive-post-title">
-        <a href="/2018/07/13/ssh-tunnel-proxy-and-port-forwarding/" class="archive-post-link">
-          SSH tunnel隧道网络穿透
-        </a>
-      </span>
-    </div>
-  
-    <div class="archive-post">
-      <time datetime="2018-07-05" class="archive-post-time">
-        2018-07-05
-      </time>
-      <span class="archive-post-title">
-        <a href="/2018/07/05/clean-github-sensitive-data-from-history/" class="archive-post-link">
-          清理git历史中的敏感信息
-        </a>
-      </span>
-    </div>
-  
-</section>
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
 
 
+    
+    
 
+    <footer class="post-footer">
+      
 
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/2020/01/15/snowflake-data-warehouse/">
+            <span class="next-text nav-default">数据仓库Snowflake论文</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
 
-
-  
-  
-  
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
 
   
   
@@ -436,14 +430,40 @@ var _hmt = _hmt || [];
   
 
   
-  
 
   
   
 
+  
 
+  
 
+  <div class="disqus-comment">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_config = function () {
+      this.page.url = "https://xiking.win/2020/04/01/redis-expire-key-review/";
+    };
+    function load_disqus() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
 
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'xiking-win';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+
+    };
+    load_disqus();
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+  </noscript>
+  
+  </div>
+
+    
 
         </div>
       </div>

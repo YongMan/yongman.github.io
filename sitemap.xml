@@ -3,19 +3,32 @@
   
   <url>
     <loc>https://xiking.win/categories/</loc>
-    <lastmod>2020-01-15T17:53:38+00:00</lastmod>
+    <lastmod>2020-04-01T07:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://xiking.win/post/</loc>
-    <lastmod>2020-01-15T17:53:38+00:00</lastmod>
+    <lastmod>2020-04-01T07:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://xiking.win/</loc>
-    <lastmod>2020-01-15T17:53:38+00:00</lastmod>
+    <lastmod>2020-04-01T07:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiking.win/2020/04/01/redis-expire-key-review/</loc>
+    <lastmod>2020-04-01T07:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiking.win/categories/%E6%8A%80%E6%9C%AF%E8%AE%B0%E5%BD%95/</loc>
+    <lastmod>2020-04-01T07:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -37,12 +50,6 @@
     <lastmod>2019-09-22T21:00:38+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiking.win/categories/%E6%8A%80%E6%9C%AF%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2019-09-22T21:00:38+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

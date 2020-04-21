@@ -3,32 +3,57 @@
   
   <url>
     <loc>https://xiking.win/categories/</loc>
-    <lastmod>2020-04-01T07:00:00+00:00</lastmod>
+    <lastmod>2020-04-21T01:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://xiking.win/post/</loc>
-    <lastmod>2020-04-01T07:00:00+00:00</lastmod>
+    <lastmod>2020-04-21T01:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://xiking.win/tags/</loc>
-    <lastmod>2020-04-01T07:00:00+00:00</lastmod>
+    <lastmod>2020-04-21T01:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiking.win/tags/k8s/</loc>
+    <lastmod>2020-04-21T01:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://xiking.win/tags/redis/</loc>
-    <lastmod>2020-04-01T07:00:00+00:00</lastmod>
+    <lastmod>2020-04-21T01:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiking.win/tags/wireshark/</loc>
+    <lastmod>2020-04-21T01:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://xiking.win/</loc>
-    <lastmod>2020-04-01T07:00:00+00:00</lastmod>
+    <lastmod>2020-04-21T01:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiking.win/categories/%E5%AD%98%E5%82%A8/</loc>
+    <lastmod>2020-04-21T01:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiking.win/2020/04/21/redis-request-time-cost-troubleshoot/</loc>
+    <lastmod>2020-04-21T01:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -36,12 +61,6 @@
     <lastmod>2020-04-01T07:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiking.win/categories/%E5%AD%98%E5%82%A8/</loc>
-    <lastmod>2020-04-01T07:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

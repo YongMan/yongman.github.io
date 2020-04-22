@@ -18,7 +18,7 @@
       <pubDate>Tue, 21 Apr 2020 01:00:00 +0000</pubDate>
       
       <guid>https://xiking.win/2020/04/21/redis-request-time-cost-troubleshoot/</guid>
-      <description>1. 问题现象 业务客户端请求Redis集群客户端看经常出现30-50ms的超时抖动，而执行的命令都是O(1)的复杂度，预期正常返回在0.1ms内</description>
+      <description>1. 问题现象 业务客户端请求Redis集群客户端看经常出现30-70ms的超时抖动，而执行的命令都是O(1)的复杂度，预期正常返回在0.1ms内</description>
     </item>
     
   </channel>

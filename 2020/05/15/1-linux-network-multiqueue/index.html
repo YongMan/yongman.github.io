@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Archive - 人生如逆旅，我亦是行人。</title>
+  <title>Linux网卡多队列实现 - 人生如逆旅，我亦是行人。</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -23,7 +23,8 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="yongman" />
-  <meta name="description" content="人生如逆旅，我亦是行人。" />
+  <meta name="description" content="rps Receive Package Steering，是用来在软件层面实现网卡报文在多个cpu处理的负载均衡。 对于多队列网卡，硬件能够支持网卡中断的处理cpu核，但是往往" />
+
   <meta name="keywords" content="yongman, 思考, 人生, 技术" />
 
 
@@ -34,8 +35,7 @@
 <meta name="generator" content="Hugo 0.55.6" />
 
 
-<link rel="canonical" href="https://xiking.win/post/" />
-<link href="%7balternate%20%7bRSS%20application/rss&#43;xml%20%20index%20alternate%20%20false%20false%20true%20false%20false%200%7d%20/post/index.xml%20https://xiking.win/post/index.xml%7d" rel="alternate" type="application/rss+xml" title="人生如逆旅，我亦是行人。" />
+<link rel="canonical" href="https://xiking.win/2020/05/15/1-linux-network-multiqueue/" />
 
 
 
@@ -59,19 +59,27 @@
 <link rel="stylesheet" href="/css/custom.css">
 
 
-<meta property="og:title" content="Posts" />
-<meta property="og:description" content="人生如逆旅，我亦是行人。" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://xiking.win/post/" />
+<meta property="og:title" content="Linux网卡多队列实现" />
+<meta property="og:description" content="rps Receive Package Steering，是用来在软件层面实现网卡报文在多个cpu处理的负载均衡。 对于多队列网卡，硬件能够支持网卡中断的处理cpu核，但是往往" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://xiking.win/2020/05/15/1-linux-network-multiqueue/" />
+<meta property="article:published_time" content="2020-05-15T01:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2020-05-15T01:00:00&#43;00:00"/>
 
-<meta property="og:updated_time" content="2020-05-15T01:00:00&#43;00:00"/>
+<meta itemprop="name" content="Linux网卡多队列实现">
+<meta itemprop="description" content="rps Receive Package Steering，是用来在软件层面实现网卡报文在多个cpu处理的负载均衡。 对于多队列网卡，硬件能够支持网卡中断的处理cpu核，但是往往">
 
-<meta itemprop="name" content="Posts">
-<meta itemprop="description" content="人生如逆旅，我亦是行人。">
 
+<meta itemprop="datePublished" content="2020-05-15T01:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-05-15T01:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="622">
+
+
+
+<meta itemprop="keywords" content="linux,kernel," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Posts"/>
-<meta name="twitter:description" content="人生如逆旅，我亦是行人。"/>
+<meta name="twitter:title" content="Linux网卡多队列实现"/>
+<meta name="twitter:description" content="rps Receive Package Steering，是用来在软件层面实现网卡报文在多个cpu处理的负载均衡。 对于多队列网卡，硬件能够支持网卡中断的处理cpu核，但是往往"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -238,7 +246,7 @@ var _hmt = _hmt || [];
 
       </li>
     
-        <li class="menu-item active">
+        <li class="menu-item">
         
           
           
@@ -296,156 +304,177 @@ var _hmt = _hmt || [];
     <main id="main" class="main bg-llight">
       <div class="content-wrapper">
         <div id="content" class="content container">
-          
-<section id="archive" class="archive">
+          <article class="post bg-white">
     
-      <div class="collection-title">
-        <h2 class="archive-year">2018</h2>
+    <header class="post-header">
+      <h1 class="post-title">Linux网卡多队列实现</h1>
+      
+      <div class="post-meta">
+        <time datetime="2020-05-15" class="post-time">
+          2020-05-15
+        </time>
+        <div class="post-category">
+            <a href="https://xiking.win/categories/%E6%8A%80%E6%9C%AF%E8%AE%B0%E5%BD%95/"> 技术记录 </a>
+            
+          </div>
+        
+
+        
+        
+
+        
+        
       </div>
+    </header>
 
-    <div class="archive-post">
-      <time datetime="2018-08-01" class="archive-post-time">
-        2018-08-01
-      </time>
-      <span class="archive-post-title">
-        <a href="/2018/08/01/leveldb-mvcc-read-write-put-delete/" class="archive-post-link">
-          LevelDB版本管理和读写操作
-        </a>
-      </span>
-    </div>
+    
     
 
-    <div class="archive-post">
-      <time datetime="2018-07-30" class="archive-post-time">
-        2018-07-30
-      </time>
-      <span class="archive-post-title">
-        <a href="/2018/07/30/implement-key-value-store-using-raft/" class="archive-post-link">
-          Leto - 基于raft快速实现一个key-value存储系统
-        </a>
-      </span>
-    </div>
     
+    <div class="post-content">
+      <ul>
+<li>rps</li>
+</ul>
 
-    <div class="archive-post">
-      <time datetime="2018-07-18" class="archive-post-time">
-        2018-07-18
-      </time>
-      <span class="archive-post-title">
-        <a href="/2018/07/18/desktop-automation-tools-for-mac/" class="archive-post-link">
-          Mac osx让工作更有效率的桌面控制管理工具
-        </a>
-      </span>
+<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200515173225.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200515173240.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200515173132.png" alt="" /></p>
+
+<p>Receive Package Steering，是用来在软件层面实现网卡报文在多个cpu处理的负载均衡。</p>
+
+<p>对于多队列网卡，硬件能够支持网卡中断的处理cpu核，但是往往cpu的核数比网卡硬件接收队列数量大很多，只依赖硬件队列无法充分发挥cpu多核的性能，rps可以通过软件来实现报文的处理分散。</p>
+
+<p>对于单队列网卡，硬件本身无法将网卡的中断绑定到多cpu核，单核cpu存在性能处理瓶颈，rps可以将报文平均分配多多个cpu上。</p>
+
+<p>以tcp报文为例，根据报文的四元组信息计算出hash值找到对应的cpu，将报文交给对应的cpu backlog进行下一步处理。在backlog队列满后，将backlog加入cpu私有数据待轮询设备列表中并触发cpu软中断，cpu这时会将backlog队列中的报文进行协议栈处理。</p>
+
+<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200515173338.png" alt="" /></p>
+
+<ul>
+<li>rfs</li>
+</ul>
+
+<p>Receive Flow Steering，rfs是基于rps的整体逻辑实现的，不同的点是改进了对不同的报文选择哪个cpu，在rps中，cpu的选择只是基于报文的hash值来决定的，虽然性能负载均衡效果好，但是会导致报文处理cpu和应用程序调度在不同的cpu，导致cpu cache miss，影响应用性能。</p>
+
+<p>rfs的目标是在选择报文交给哪个cpu处理时，选择的是应用程序所在的cpu进行内核态报文处理，增加cpu缓存命中率。具体的实现依赖内核中的两个流表：</p>
+
+<p>1）设备流表：上次内核态处理该流中报文的cpu</p>
+
+<p>2）全局socket流表：流中报文期望被处理的目标cpu</p>
+
+<ul>
+<li>rss</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200515154351.png" alt="" /></p>
+
+<p>Receive Side Scaling，网卡多队列硬件实现。</p>
+
+<p><strong>参考</strong></p>
+
+<ol>
+<li><a href="https://tqr.ink/2017/07/09/implementation-of-rps-and-rfs/">https://tqr.ink/2017/07/09/implementation-of-rps-and-rfs/</a></li>
+<li><a href="https://tonydeng.github.io/sdn-handbook/dpdk/queue.html">https://tonydeng.github.io/sdn-handbook/dpdk/queue.html</a></li>
+</ol>
+
     </div>
+
     
-
-    <div class="archive-post">
-      <time datetime="2018-07-17" class="archive-post-time">
-        2018-07-17
-      </time>
-      <span class="archive-post-title">
-        <a href="/2018/07/17/tidis-distributed-transactional-redis-protocol-disk-storage/" class="archive-post-link">
-          Tidis - 基于tikv实现兼容redis协议分布式事务存储
-        </a>
-      </span>
-    </div>
     
-
-    <div class="archive-post">
-      <time datetime="2018-07-13" class="archive-post-time">
-        2018-07-13
-      </time>
-      <span class="archive-post-title">
-        <a href="/2018/07/13/ssh-tunnel-proxy-and-port-forwarding/" class="archive-post-link">
-          SSH tunnel隧道网络穿透
-        </a>
-      </span>
-    </div>
-    
-
-    <div class="archive-post">
-      <time datetime="2018-07-05" class="archive-post-time">
-        2018-07-05
-      </time>
-      <span class="archive-post-title">
-        <a href="/2018/07/05/clean-github-sensitive-data-from-history/" class="archive-post-link">
-          清理git历史中的敏感信息
-        </a>
-      </span>
-    </div>
-    
-
-    <div class="archive-post">
-      <time datetime="2018-06-22" class="archive-post-time">
-        2018-06-22
-      </time>
-      <span class="archive-post-title">
-        <a href="/2018/06/22/percolator-paper/" class="archive-post-link">
-          Percolator论文学习
-        </a>
-      </span>
-    </div>
-    
-
-    <div class="archive-post">
-      <time datetime="2018-06-01" class="archive-post-time">
-        2018-06-01
-      </time>
-      <span class="archive-post-title">
-        <a href="/2018/06/01/a-new-start/" class="archive-post-link">
-          新的开始
-        </a>
-      </span>
-    </div></section>
-
-
-
-
-
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  
-  <nav class="pagination">
-    <ul>
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">yongman</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+      2020-05-15
       
-      <li >
-        <a href="/post/">1</a>
-      </li>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://xiking.win/tags/linux/">linux</a>
+          <a href="https://xiking.win/tags/kernel/">kernel</a>
+          
+        </div>
+
       
-      <li >
-        <a href="/post/page/2/">2</a>
-      </li>
-      
-      <li >
-        <a href="/post/page/3/">3</a>
-      </li>
-      
-      <li  class="active" >
-        <a href="/post/page/4/">4</a>
-      </li>
-      
-    </ul>
-  </nav>
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/2020/04/21/redis-request-time-cost-troubleshoot/">
+            <span class="next-text nav-default">记一次Redis超时抖动问题排查</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
 
   
   
 
+  
+  
 
+  
 
+  
+  
 
+  
+
+  
+
+  <div class="disqus-comment">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_config = function () {
+      this.page.url = "https://xiking.win/2020/05/15/1-linux-network-multiqueue/";
+    };
+    function load_disqus() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'xiking-win';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+
+    };
+    load_disqus();
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+  </noscript>
+  
+  </div>
+
+    
 
         </div>
       </div>

@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>yongman</copyright>
-    <lastBuildDate>Fri, 15 May 2020 01:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 18 May 2020 01:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://xiking.win/categories/%E6%8A%80%E6%9C%AF%E8%AE%B0%E5%BD%95/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>记一次线上Linux网卡丢包问题排查</title>
+      <link>https://xiking.win/2020/05/18/2-linux-kernel-net-packet-dropped/</link>
+      <pubDate>Mon, 18 May 2020 01:00:00 +0000</pubDate>
+      
+      <guid>https://xiking.win/2020/05/18/2-linux-kernel-net-packet-dropped/</guid>
+      <description>1. 问题现象 线上环境业务反馈业务访问服务存在大量超时，通过查看监控，发现集群内3个envoy进程pod网卡tx队列丢包严重。 看到对应网卡pps</description>
+    </item>
     
     <item>
       <title>Linux网卡多队列实现</title>

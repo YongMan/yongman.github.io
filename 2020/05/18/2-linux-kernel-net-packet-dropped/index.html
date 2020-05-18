@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Tags - 人生如逆旅，我亦是行人。</title>
+  <title>记一次线上Linux网卡丢包问题排查 - 人生如逆旅，我亦是行人。</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -23,7 +23,8 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="yongman" />
-  <meta name="description" content="人生如逆旅，我亦是行人。" />
+  <meta name="description" content="1. 问题现象 线上环境业务反馈业务访问服务存在大量超时，通过查看监控，发现集群内3个envoy进程pod网卡tx队列丢包严重。 看到对应网卡pps" />
+
   <meta name="keywords" content="yongman, 思考, 人生, 技术" />
 
 
@@ -34,8 +35,7 @@
 <meta name="generator" content="Hugo 0.55.6" />
 
 
-<link rel="canonical" href="https://xiking.win/tags/" />
-<link href="%7balternate%20%7bRSS%20application/rss&#43;xml%20%20index%20alternate%20%20false%20false%20true%20false%20false%200%7d%20/tags/index.xml%20https://xiking.win/tags/index.xml%7d" rel="alternate" type="application/rss+xml" title="人生如逆旅，我亦是行人。" />
+<link rel="canonical" href="https://xiking.win/2020/05/18/2-linux-kernel-net-packet-dropped/" />
 
 
 
@@ -59,19 +59,27 @@
 <link rel="stylesheet" href="/css/custom.css">
 
 
-<meta property="og:title" content="Tags" />
-<meta property="og:description" content="人生如逆旅，我亦是行人。" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://xiking.win/tags/" />
+<meta property="og:title" content="记一次线上Linux网卡丢包问题排查" />
+<meta property="og:description" content="1. 问题现象 线上环境业务反馈业务访问服务存在大量超时，通过查看监控，发现集群内3个envoy进程pod网卡tx队列丢包严重。 看到对应网卡pps" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://xiking.win/2020/05/18/2-linux-kernel-net-packet-dropped/" />
+<meta property="article:published_time" content="2020-05-18T01:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2020-05-18T01:00:00&#43;00:00"/>
 
-<meta property="og:updated_time" content="2020-05-18T01:00:00&#43;00:00"/>
+<meta itemprop="name" content="记一次线上Linux网卡丢包问题排查">
+<meta itemprop="description" content="1. 问题现象 线上环境业务反馈业务访问服务存在大量超时，通过查看监控，发现集群内3个envoy进程pod网卡tx队列丢包严重。 看到对应网卡pps">
 
-<meta itemprop="name" content="Tags">
-<meta itemprop="description" content="人生如逆旅，我亦是行人。">
 
+<meta itemprop="datePublished" content="2020-05-18T01:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-05-18T01:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1128">
+
+
+
+<meta itemprop="keywords" content="linux,kernel," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Tags"/>
-<meta name="twitter:description" content="人生如逆旅，我亦是行人。"/>
+<meta name="twitter:title" content="记一次线上Linux网卡丢包问题排查"/>
+<meta name="twitter:description" content="1. 问题现象 线上环境业务反馈业务访问服务存在大量超时，通过查看监控，发现集群内3个envoy进程pod网卡tx队列丢包严重。 看到对应网卡pps"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -249,7 +257,7 @@ var _hmt = _hmt || [];
 
       </li>
     
-        <li class="menu-item active">
+        <li class="menu-item">
         
           
           
@@ -296,177 +304,221 @@ var _hmt = _hmt || [];
     <main id="main" class="main bg-llight">
       <div class="content-wrapper">
         <div id="content" class="content container">
-          
-  
-  
-  
-  
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">记一次线上Linux网卡丢包问题排查</h1>
+      
+      <div class="post-meta">
+        <time datetime="2020-05-18" class="post-time">
+          2020-05-18
+        </time>
+        <div class="post-category">
+            <a href="https://xiking.win/categories/%E6%8A%80%E6%9C%AF%E8%AE%B0%E5%BD%95/"> 技术记录 </a>
+            
+          </div>
+        
 
-  
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="tag-cloud" style="padding: 5px 15px">
-      <div class="tag-cloud-title">
-        13 Tags In Total
+        
+        
+
+        
+        
       </div>
-      <div class="tag-cloud-tags">
+    </header>
+
+    
+    
+
+    
+    <div class="post-content">
       
-        
-        
-        
-        
-        
-        
-        
-        <a href="https://xiking.win/tags/ci/"
-          style="font-size:1rem">ci</a>
-        
-      
-        
-        
-        
-        
-        
-        
-        
-        <a href="https://xiking.win/tags/gitlab/"
-          style="font-size:1rem">gitlab</a>
-        
-      
-        
-        
-        
-        
-        
-        
-        
-        <a href="https://xiking.win/tags/google-assistant/"
-          style="font-size:1rem">google-assistant</a>
-        
-      
-        
-        
-        
-        
-        
-        
-        
-        <a href="https://xiking.win/tags/hexo/"
-          style="font-size:1rem">hexo</a>
-        
-      
-        
-        
-        
-        
-        
-        
-        
-        <a href="https://xiking.win/tags/homeassistant/"
-          style="font-size:1rem">homeassistant</a>
-        
-      
-        
-        
-        
-        
-        
-        
-        
-        <a href="https://xiking.win/tags/hugo/"
-          style="font-size:1rem">hugo</a>
-        
-      
-        
-        
-        
-        
-        
-        
-        
-        <a href="https://xiking.win/tags/k8s/"
-          style="font-size:1rem">k8s</a>
-        
-      
-        
-        
-        
-        
-        
-        
-        
-        <a href="https://xiking.win/tags/kernel/"
-          style="font-size:1.9463946303571862rem">kernel</a>
-        
-      
-        
-        
-        
-        
-        
-        
-        
-        <a href="https://xiking.win/tags/linux/"
-          style="font-size:1.9463946303571862rem">linux</a>
-        
-      
-        
-        
-        
-        
-        
-        
-        
-        <a href="https://xiking.win/tags/redis/"
-          style="font-size:1.9463946303571862rem">redis</a>
-        
-      
-        
-        
-        
-        
-        
-        
-        
-        <a href="https://xiking.win/tags/rocksdb/"
-          style="font-size:1rem">rocksdb</a>
-        
-      
-        
-        
-        
-        
-        
-        
-        
-        <a href="https://xiking.win/tags/synology/"
-          style="font-size:1rem">synology</a>
-        
-      
-        
-        
-        
-        
-        
-        
-        
-        <a href="https://xiking.win/tags/wireshark/"
-          style="font-size:1rem">wireshark</a>
-        
-      
-      </div>
+
+<h4 id="1-问题现象">1. 问题现象</h4>
+
+<p>线上环境业务反馈业务访问服务存在大量超时，通过查看监控，发现集群内3个envoy进程pod网卡tx队列丢包严重。</p>
+
+<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200518185647.png" alt="" /></p>
+
+<p>看到对应网卡pps和流量都存在陡增。</p>
+
+<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200518185751.png" alt="" /></p>
+
+<p>tcp监控统计到存在大量的tcp重传。</p>
+
+<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200518190020.png" alt="" /></p>
+
+<p>查看对应的tcp连接的监控发现对应的时间段存在大量的新建连接。</p>
+
+<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200518190227.png" alt="" /></p>
+
+<p>对应时间段，envoy本身的监控<code>downstream_cx_active</code>也能够看到envoy维持了大量连接。</p>
+
+<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200518190629.png" alt="" /></p>
+
+<p>并且下游的请求<code>downstream_rq_active</code>产生了阻塞。</p>
+
+<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200518190732.png" alt="" /></p>
+
+<h4 id="2-问题分析">2. 问题分析</h4>
+
+<p>通过线下最先怀疑的是是不是流量达到了pod网卡的pps或者qos限制，线上环境pod的网卡并没有做相关限制，并且通过监控看，网卡的流量的确没有达到物理机网卡处理瓶颈。</p>
+
+<p>通过和业务同步使用方式，业务的连接采用的是短连接，并且在有超时后会强制断开并新建连接，在网络异常时连接数可能比平时大几倍甚至十几倍。</p>
+
+<p>说到短连接：</p>
+
+<ol>
+<li>首先怀疑是否是内核中nf_conntrack_table满了导致的连接失败，通过机器<code>dmesg</code>并未发现相关内核日志。</li>
+<li>envoy是否设置了listen socket的tcp backlog长度，通过分析源码</li>
+</ol>
+
+<p><a href="https://github.com/envoyproxy/envoy/blob/7ff7cb4c6a1dd62e43ad9aeaee98bb103971ba6a/source/common/network/listener_impl.cc#L52">https://github.com/envoyproxy/envoy/blob/7ff7cb4c6a1dd62e43ad9aeaee98bb103971ba6a/source/common/network/listener_impl.cc#L52</a></p>
+
+<p>envoy中使用了libevent库，调用evconnlistener_new来创建监听。</p>
+
+<p><code>evconnlistener_new(&amp;dispatcher.base(), listenCallback, this, 0, -1, socket.ioHandle().fd()));</code></p>
+
+<p>代码中直接传入<code>-1</code>作为backlog长度，并没有对backlog进行限制。</p>
+
+<p>关于listen函数backlog的参数定义如下：</p>
+
+<pre><code>Now it specifies the queue length for completely established sockets waiting to be accepted,
+instead of the number of incomplete connection requests. 
+The maximum length of the queue for incomplete sockets can be set using the tcp_max_syn_backlog sysctl. 
+When syncookies are enabled there is no logical maximum length and this sysctl setting is ignored.
+If the socket is of type AF_INET, and the backlog argument is greater than the constant SOMAXCONN(128 default), 
+it is silently truncated to SOMAXCONN.
+</code></pre>
+
+<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200518192935.png" alt="" /></p>
+
+<p>现在的内核中，采用上图中两个队列分别来控制半连接<code>SYN_RCVD</code>状态的连接和<code>ESTABLISHED</code>状态连接。listen函数中的backlog参数就是指的<code>ESTABLISHED</code>状态连接队列的长度。如果在listen函数中不进行配置，内核就会采用somaxconn作为默认值。当两个参数都进行设置的话，就按较小的参数来进行设置。</p>
+
+<ol>
+<li>somaxconn内核参数</li>
+</ol>
+
+<p>envoy的pod镜像采用的社区镜像，并未对内核参数进行优化，somaxconn参数保持了操作系统默认值<code>128</code>。</p>
+
+<p>对于高并发的短连接应用来说，在没有及时调用accept进行处理时，会导致accept queue队列满。</p>
+
+<p>在队列满的情况下，内核参数<code>/proc/sys/net/ipv4/tcp_abort_on_overflow</code>默认是0，操作系统不会给连接回复<code>RST</code>，而是默默的将<code>ACK</code>丢弃。会导致server对第二个包<code>SYN+ACK</code>进行重传，连接也无法建立。</p>
+
+<pre><code class="language-shell">netstat -s | egrep &quot;listen|LISTEN&quot;
+200961 times the listen queue of a socket overflowed
+200961 SYNs to LISTEN sockets dropped
+</code></pre>
+
+<p>通过上述命令可以看到的确存在大量的队列满。</p>
+
+<p>后续调整对应内核参数。</p>
+
+<p><strong>参考</strong></p>
+
+<ol>
+<li><a href="https://jaminzhang.github.io/linux/understand-Linux-backlog-and-somaxconn-kernel-arguments/">https://jaminzhang.github.io/linux/understand-Linux-backlog-and-somaxconn-kernel-arguments/</a></li>
+<li><a href="https://www.cnblogs.com/xuxiuxiu/p/7825916.html">https://www.cnblogs.com/xuxiuxiu/p/7825916.html</a></li>
+<li><a href="https://www.4os.org/2010/10/15/%e5%85%b3%e4%ba%8enet-core-somaxconn%e5%8f%82%e6%95%b0/">https://www.4os.org/2010/10/15/%e5%85%b3%e4%ba%8enet-core-somaxconn%e5%8f%82%e6%95%b0/</a></li>
+<li><a href="http://jm.taobao.org/2017/05/25/525-1/">http://jm.taobao.org/2017/05/25/525-1/</a></li>
+</ol>
+
     </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">yongman</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+      2020-05-18
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://xiking.win/tags/linux/">linux</a>
+          <a href="https://xiking.win/tags/kernel/">kernel</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/2020/05/15/1-linux-network-multiqueue/">
+            <span class="next-text nav-default">Linux网卡多队列实现</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
   
   
 
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  <div class="disqus-comment">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_config = function () {
+      this.page.url = "https://xiking.win/2020/05/18/2-linux-kernel-net-packet-dropped/";
+    };
+    function load_disqus() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'xiking-win';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+
+    };
+    load_disqus();
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+  </noscript>
+  
+  </div>
+
+    
 
         </div>
       </div>

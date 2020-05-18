@@ -3,8 +3,51 @@
   
   <url>
     <loc>https://xiking.win/categories/</loc>
-    <lastmod>2020-05-15T01:00:00+00:00</lastmod>
+    <lastmod>2020-05-18T01:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiking.win/post/</loc>
+    <lastmod>2020-05-18T01:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiking.win/tags/</loc>
+    <lastmod>2020-05-18T01:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiking.win/tags/kernel/</loc>
+    <lastmod>2020-05-18T01:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiking.win/tags/linux/</loc>
+    <lastmod>2020-05-18T01:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiking.win/</loc>
+    <lastmod>2020-05-18T01:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiking.win/categories/%E6%8A%80%E6%9C%AF%E8%AE%B0%E5%BD%95/</loc>
+    <lastmod>2020-05-18T01:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiking.win/2020/05/18/2-linux-kernel-net-packet-dropped/</loc>
+    <lastmod>2020-05-18T01:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -12,42 +55,6 @@
     <lastmod>2020-05-15T01:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiking.win/post/</loc>
-    <lastmod>2020-05-15T01:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiking.win/tags/</loc>
-    <lastmod>2020-05-15T01:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiking.win/tags/kernel/</loc>
-    <lastmod>2020-05-15T01:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiking.win/tags/linux/</loc>
-    <lastmod>2020-05-15T01:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiking.win/</loc>
-    <lastmod>2020-05-15T01:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiking.win/categories/%E6%8A%80%E6%9C%AF%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2020-05-15T01:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

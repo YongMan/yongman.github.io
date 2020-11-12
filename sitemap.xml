@@ -3,19 +3,44 @@
   
   <url>
     <loc>https://xiking.win/categories/</loc>
-    <lastmod>2020-05-18T01:00:00+00:00</lastmod>
+    <lastmod>2020-11-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://xiking.win/post/</loc>
-    <lastmod>2020-05-18T01:00:00+00:00</lastmod>
+    <lastmod>2020-11-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://xiking.win/tags/</loc>
-    <lastmod>2020-05-18T01:00:00+00:00</lastmod>
+    <lastmod>2020-11-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiking.win/tags/homeassistant/</loc>
+    <lastmod>2020-11-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiking.win/</loc>
+    <lastmod>2020-11-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiking.win/2020/11/12/3-deye-dehumidifer-add-to-homeassistant/</loc>
+    <lastmod>2020-11-12T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiking.win/categories/%E6%8A%80%E6%9C%AF%E8%AE%B0%E5%BD%95/</loc>
+    <lastmod>2020-11-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -27,18 +52,6 @@
   
   <url>
     <loc>https://xiking.win/tags/linux/</loc>
-    <lastmod>2020-05-18T01:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiking.win/</loc>
-    <lastmod>2020-05-18T01:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiking.win/categories/%E6%8A%80%E6%9C%AF%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2020-05-18T01:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -209,12 +222,6 @@
   
   <url>
     <loc>https://xiking.win/tags/google-assistant/</loc>
-    <lastmod>2018-11-15T01:27:53+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiking.win/tags/homeassistant/</loc>
     <lastmod>2018-11-15T01:27:53+00:00</lastmod>
     <priority>0</priority>
   </url>

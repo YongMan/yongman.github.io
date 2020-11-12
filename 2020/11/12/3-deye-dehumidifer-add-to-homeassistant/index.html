@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>记一次线上Linux网卡丢包问题排查 - 人生如逆旅，我亦是行人。</title>
+  <title>德业除湿机接入HomeAssistant - 人生如逆旅，我亦是行人。</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="yongman" />
-  <meta name="description" content="1. 问题现象 线上环境业务反馈业务访问服务存在大量超时，通过查看监控，发现集群内3个envoy进程pod网卡tx队列丢包严重。 看到对应网卡pps" />
+  <meta name="description" content="由于德业除湿机比较小众，homeassistant官方和社区也没有现成的集成可用，要接入homeassistant只能自己来研究一下交互协议" />
 
   <meta name="keywords" content="yongman, 思考, 人生, 技术" />
 
@@ -35,7 +35,7 @@
 <meta name="generator" content="Hugo 0.55.6" />
 
 
-<link rel="canonical" href="https://xiking.win/2020/05/18/2-linux-kernel-net-packet-dropped/" />
+<link rel="canonical" href="https://xiking.win/2020/11/12/3-deye-dehumidifer-add-to-homeassistant/" />
 
 
 
@@ -59,27 +59,27 @@
 <link rel="stylesheet" href="/css/custom.css">
 
 
-<meta property="og:title" content="记一次线上Linux网卡丢包问题排查" />
-<meta property="og:description" content="1. 问题现象 线上环境业务反馈业务访问服务存在大量超时，通过查看监控，发现集群内3个envoy进程pod网卡tx队列丢包严重。 看到对应网卡pps" />
+<meta property="og:title" content="德业除湿机接入HomeAssistant" />
+<meta property="og:description" content="由于德业除湿机比较小众，homeassistant官方和社区也没有现成的集成可用，要接入homeassistant只能自己来研究一下交互协议" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://xiking.win/2020/05/18/2-linux-kernel-net-packet-dropped/" />
-<meta property="article:published_time" content="2020-05-18T01:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2020-05-18T01:00:00&#43;00:00"/>
+<meta property="og:url" content="https://xiking.win/2020/11/12/3-deye-dehumidifer-add-to-homeassistant/" />
+<meta property="article:published_time" content="2020-11-12T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2020-11-12T00:00:00&#43;00:00"/>
 
-<meta itemprop="name" content="记一次线上Linux网卡丢包问题排查">
-<meta itemprop="description" content="1. 问题现象 线上环境业务反馈业务访问服务存在大量超时，通过查看监控，发现集群内3个envoy进程pod网卡tx队列丢包严重。 看到对应网卡pps">
-
-
-<meta itemprop="datePublished" content="2020-05-18T01:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-05-18T01:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1128">
+<meta itemprop="name" content="德业除湿机接入HomeAssistant">
+<meta itemprop="description" content="由于德业除湿机比较小众，homeassistant官方和社区也没有现成的集成可用，要接入homeassistant只能自己来研究一下交互协议">
 
 
+<meta itemprop="datePublished" content="2020-11-12T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-11-12T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1777">
 
-<meta itemprop="keywords" content="linux,kernel," />
+
+
+<meta itemprop="keywords" content="homeassistant," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="记一次线上Linux网卡丢包问题排查"/>
-<meta name="twitter:description" content="1. 问题现象 线上环境业务反馈业务访问服务存在大量超时，通过查看监控，发现集群内3个envoy进程pod网卡tx队列丢包严重。 看到对应网卡pps"/>
+<meta name="twitter:title" content="德业除湿机接入HomeAssistant"/>
+<meta name="twitter:description" content="由于德业除湿机比较小众，homeassistant官方和社区也没有现成的集成可用，要接入homeassistant只能自己来研究一下交互协议"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -307,11 +307,11 @@ var _hmt = _hmt || [];
           <article class="post bg-white">
     
     <header class="post-header">
-      <h1 class="post-title">记一次线上Linux网卡丢包问题排查</h1>
+      <h1 class="post-title">德业除湿机接入HomeAssistant</h1>
       
       <div class="post-meta">
-        <time datetime="2020-05-18" class="post-time">
-          2020-05-18
+        <time datetime="2020-11-12" class="post-time">
+          2020-11-12
         </time>
         <div class="post-category">
             <a href="https://xiking.win/categories/%E6%8A%80%E6%9C%AF%E8%AE%B0%E5%BD%95/"> 技术记录 </a>
@@ -334,94 +334,258 @@ var _hmt = _hmt || [];
     <div class="post-content">
       
 
-<h4 id="1-问题现象">1. 问题现象</h4>
+<p>由于德业除湿机比较小众，homeassistant官方和社区也没有现成的集成可用，要接入homeassistant只能自己来研究一下交互协议了。因为物联设备可能由于功耗和功能考虑，不需要运行linux系统，可能是一些类似MiCO的物联操作系统，内部的控制一般分为两种，一种是直接通过接口（http或tcp），安全性和可维护性上可能需要叫多的额外工作量；一种是基于mqtt的控制，这种比较简单，设备中只需要处理和mqtt进行交互，控制逻辑完全解耦，设备上只需要进行数据协议解析和处理，可维护性好，但是mqtt对应的认证信息获取到后，在任何设备上都可以进行控制。德业就是用的后者。</p>
 
-<p>线上环境业务反馈业务访问服务存在大量超时，通过查看监控，发现集群内3个envoy进程pod网卡tx队列丢包严重。</p>
+<h4 id="1-接口获取">1. 接口获取</h4>
 
-<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200518185647.png" alt="" /></p>
+<p>想要获取接口，一个是去官网查询是否有开放平台，是否有和其他设备联动的开放接口文档说明，结果意料之中，没有。</p>
 
-<p>看到对应网卡pps和流量都存在陡增。</p>
+<p>有没有其他人搞过类似设备的联动接入，github搜索了一圈，结果意料之中，没有。</p>
 
-<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200518185751.png" alt="" /></p>
+<p>自己动手，丰衣足食。开搞。</p>
 
-<p>tcp监控统计到存在大量的tcp重传。</p>
+<p>APK反编译。</p>
 
-<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200518190020.png" alt="" /></p>
-
-<p>查看对应的tcp连接的监控发现对应的时间段存在大量的新建连接。</p>
-
-<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200518190227.png" alt="" /></p>
-
-<p>对应时间段，envoy本身的监控<code>downstream_cx_active</code>也能够看到envoy维持了大量连接。</p>
-
-<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200518190629.png" alt="" /></p>
-
-<p>并且下游的请求<code>downstream_rq_active</code>产生了阻塞。</p>
-
-<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200518190732.png" alt="" /></p>
-
-<h4 id="2-问题分析">2. 问题分析</h4>
-
-<p>通过线下最先怀疑的是是不是流量达到了pod网卡的pps或者qos限制，线上环境pod的网卡并没有做相关限制，并且通过监控看，网卡的流量的确没有达到物理机网卡处理瓶颈。</p>
-
-<p>通过和业务同步使用方式，业务的连接采用的是短连接，并且在有超时后会强制断开并新建连接，在网络异常时连接数可能比平时大几倍甚至十几倍。</p>
-
-<p>说到短连接：</p>
+<p>反编译使用的工具：</p>
 
 <ol>
-<li>首先怀疑是否是内核中nf_conntrack_table满了导致的连接失败，通过机器<code>dmesg</code>并未发现相关内核日志。</li>
-<li>envoy是否设置了listen socket的tcp backlog长度，通过分析源码</li>
+<li>apktool：资源文件获取，可以提取出图片文件和布局文件进行使用查看（本次不需要，我们只需要api）</li>
+<li>dex2jar：apk反编译成java源码。生成jar文件。</li>
+<li>jd-gui或luyten：查看jar文件中的源码文件。jd-gui有些源码只能显示成bytecode，解析不完整，后面更换了luyten。</li>
 </ol>
 
-<p><a href="https://github.com/envoyproxy/envoy/blob/7ff7cb4c6a1dd62e43ad9aeaee98bb103971ba6a/source/common/network/listener_impl.cc#L52">https://github.com/envoyproxy/envoy/blob/7ff7cb4c6a1dd62e43ad9aeaee98bb103971ba6a/source/common/network/listener_impl.cc#L52</a></p>
+<p>具体的反编译过程也比较简单，这里省略。</p>
 
-<p>envoy中使用了libevent库，调用evconnlistener_new来创建监听。</p>
+<p>最终使用luyten打开生成的jar文件。</p>
 
-<p><code>evconnlistener_new(&amp;dispatcher.base(), listenCallback, this, 0, -1, socket.ioHandle().fd()));</code></p>
+<p>在<code>io.fogcloud.sdk.fog.helper.Configuration.class</code>中找到了API地址和接口。</p>
 
-<p>代码中直接传入<code>-1</code>作为backlog长度，并没有对backlog进行限制。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yongman/i@img/picgo/20201112160516.png" alt="" /></p>
 
-<p>关于listen函数backlog的参数定义如下：</p>
+<p>好奇的打开了https地址，赫然的几个大字”Hello World“，这系统感觉是外包给学生做的。</p>
 
-<pre><code>Now it specifies the queue length for completely established sockets waiting to be accepted,
-instead of the number of incomplete connection requests. 
-The maximum length of the queue for incomplete sockets can be set using the tcp_max_syn_backlog sysctl. 
-When syncookies are enabled there is no logical maximum length and this sysctl setting is ignored.
-If the socket is of type AF_INET, and the backlog argument is greater than the constant SOMAXCONN(128 default), 
-it is silently truncated to SOMAXCONN.
+<p>又随便输入了url后缀，好嘛，接口都给列出来了，这下更省事了。</p>
+
+<p><img src="https://cdn.jsdelivr.net/gh/yongman/i@img/picgo/20201112160743.png" alt="" /></p>
+
+<p><strong>登陆</strong></p>
+
+<p>接下来要做的是从登陆认证接口开始查看，并模拟登陆过程。</p>
+
+<p><img src="https://cdn.jsdelivr.net/gh/yongman/i@img/picgo/20201112161020.png" alt="" /></p>
+
+<p>通过源码中的逻辑，可以看到登陆的url和参数，填入对应的参数后登陆，OK。</p>
+
+<pre><code class="language-json">{
+    &quot;meta&quot;: {
+        &quot;code&quot;: 0,
+        &quot;message&quot;: &quot;signup ok.&quot;
+    },
+    &quot;data&quot;: {
+        &quot;token&quot;: &quot;eyJSSSSSSDDDDDDDDDDDDCZZZZZZZZZZQyYWM0ODAwMDSFDASDkiLCJhcHBsdwpZCI6ImE3NzQzMTBlLWE0MzAtMTFlNy05ZDRjLTAwMTYzZTBjMWIyMSIsImV4dGVuZCI6eyJjaWQiOiIxMTExMTExMjIyMjMzMzxxMiLCJ0eXBlIjoiMCIsInB1c2h0eXBlIjoiQWxpIn0swNTUyODY2NX0.11atoJf6zwyjd9t2oWvGGdiSCNRSSSSSSSSSSSSFnUG8&quot;,
+        &quot;clientid&quot;: &quot;45abed2ec8de11eaa06c022134asfadas523123&quot;
+    }
+}
 </code></pre>
 
-<p><img src="https://raw.githubusercontent.com/yongman/i/img/picgo/20200518192935.png" alt="" /></p>
+<p>返回的是认证token和clientid。</p>
 
-<p>现在的内核中，采用上图中两个队列分别来控制半连接<code>SYN_RCVD</code>状态的连接和<code>ESTABLISHED</code>状态连接。listen函数中的backlog参数就是指的<code>ESTABLISHED</code>状态连接队列的长度。如果在listen函数中不进行配置，内核就会采用somaxconn作为默认值。当两个参数都进行设置的话，就按较小的参数来进行设置。</p>
+<p>后续的http接口使用改token进行认证即可。</p>
 
-<ol>
-<li>somaxconn内核参数</li>
-</ol>
+<p><strong>获取设备列表</strong></p>
 
-<p>envoy的pod镜像采用的社区镜像，并未对内核参数进行优化，somaxconn参数保持了操作系统默认值<code>128</code>。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yongman/i@img/picgo/20201112161340.png" alt="" /></p>
 
-<p>对于高并发的短连接应用来说，在没有及时调用accept进行处理时，会导致accept queue队列满。</p>
+<p>结果返回：</p>
 
-<p>在队列满的情况下，内核参数<code>/proc/sys/net/ipv4/tcp_abort_on_overflow</code>默认是0，操作系统不会给连接回复<code>RST</code>，而是默默的将<code>ACK</code>丢弃。会导致server对第二个包<code>SYN+ACK</code>进行重传，连接也无法建立。</p>
-
-<pre><code class="language-shell">netstat -s | egrep &quot;listen|LISTEN&quot;
-200961 times the listen queue of a socket overflowed
-200961 SYNs to LISTEN sockets dropped
+<pre><code class="language-json">{
+    &quot;meta&quot;: {
+        &quot;code&quot;: 0,
+        &quot;message&quot;: &quot;device list by user.&quot;
+    },
+    &quot;data&quot;: [
+        {
+            &quot;online&quot;: true,
+            &quot;product_icon&quot;: &quot;https://deye-cloud.oss-cn-shanghai.aliyuncs.com/profile/1597889707825.png&quot;,
+            &quot;product_id&quot;: &quot;xxxxxxxxxxxxxxxxxxxxxx&quot;,
+            &quot;product_name&quot;: &quot;DYD-E12A3&quot;,
+            &quot;device_id&quot;: &quot;xxxxxxxxxxxxx&quot;,
+            &quot;mac&quot;: &quot;xxxxxxxxxxx&quot;,
+            &quot;role&quot;: 1,
+            &quot;gatewaytype&quot;: 0,
+            &quot;device_name&quot;: &quot;DYD-E12A3&quot;
+        }
+    ]
+}
 </code></pre>
 
-<p>通过上述命令可以看到的确存在大量的队列满。</p>
+<p>上面的信息中的product_id、device_id记好，后面会用到。</p>
 
-<p>后续调整对应内核参数。</p>
+<p><strong>设备控制</strong></p>
 
-<p><strong>参考</strong></p>
+<p>上面是访问服务端接口获取一些基本信息，控制设备并没有相关的api接口。看了下源码中的对应的按钮绑定的事件，找到对应的命令发送接口调用。</p>
+
+<p><img src="https://cdn.jsdelivr.net/gh/yongman/i@img/picgo/20201112162311.png" alt="" /></p>
+
+<p>可以看到，命令是通过mqtt来发送的。</p>
+
+<p>mqtt的信息是在服务端接口请求来的。</p>
+
+<p><img src="https://cdn.jsdelivr.net/gh/yongman/i@img/picgo/20201112162456.png" alt="" /></p>
+
+<p>mqtt信息返回：</p>
+
+<pre><code class="language-json">{
+    &quot;meta&quot;: {
+        &quot;code&quot;: 0,
+        &quot;message&quot;: &quot;mqtt info&quot;
+    },
+    &quot;data&quot;: {
+        &quot;loginname&quot;: &quot;xxxxxxxxxx/xxxxxxxxxxxxxxx&quot;,
+        &quot;clientid&quot;: &quot;xxxxxxxxxxx&quot;,
+        &quot;endpoint&quot;: &quot;xxxxxxxxxxxxxxxx&quot;,
+        &quot;password&quot;: &quot;xxxxxxxxxx&quot;,
+        &quot;mqtthost&quot;: &quot;xxxxxxxxxxxxxxxxxxx.mqtt.iot.gz.baidubce.com&quot;,
+        &quot;mqttport&quot;: 1883,
+        &quot;sslport&quot;: 1884
+    }
+}
+</code></pre>
+
+<p><strong>设备开启/关闭命令格式</strong></p>
+
+<p>在sendMsg中可以看到具体命令发送的topic和具体的数据。发送的数据采用的是二进制格式，格式转换也比较简单，先把对应的控制属性转换成控制位，并且对控制位采用了ascii编码的字节。</p>
+
+<p>最终生成的是8字节的二进制数据。</p>
+
+<p><img src="https://cdn.jsdelivr.net/gh/yongman/i@img/picgo/20201112170353.png" alt="" /></p>
+
+<p>下面按格式模拟生成数据。</p>
+
+<pre><code class="language-python">payload = struct.pack('10b', 8,2,1,0,30,0,0,0,0,0) // 开启开关控制数据
+payload = struct.pack('10b', 8,2,0,0,30,0,0,0,0,0) // 关闭开关控制数据
+</code></pre>
+
+<h4 id="2-集成到homeassistant">2. 集成到homeassistant</h4>
+
+<p>homeassistant对于mqtt的设备已经支持，只是目前的mqtt设备发送的控制payload无法通过yaml配置二进制数据，只能进行二次开发。</p>
 
 <ol>
-<li><a href="https://jaminzhang.github.io/linux/understand-Linux-backlog-and-somaxconn-kernel-arguments/">https://jaminzhang.github.io/linux/understand-Linux-backlog-and-somaxconn-kernel-arguments/</a></li>
-<li><a href="https://www.cnblogs.com/xuxiuxiu/p/7825916.html">https://www.cnblogs.com/xuxiuxiu/p/7825916.html</a></li>
-<li><a href="https://www.4os.org/2010/10/15/%e5%85%b3%e4%ba%8enet-core-somaxconn%e5%8f%82%e6%95%b0/">https://www.4os.org/2010/10/15/%e5%85%b3%e4%ba%8enet-core-somaxconn%e5%8f%82%e6%95%b0/</a></li>
-<li><a href="http://jm.taobao.org/2017/05/25/525-1/">http://jm.taobao.org/2017/05/25/525-1/</a></li>
+<li><p>复制components中的mqtt模块到custom_components，系统启动时会优先在custom_components中加载mqtt模块，覆盖系统自带的mqtt集成模块。</p></li>
+
+<li><p>需要增加对deye设备二进制数据的支持，在mqtt的switch.py设备实现中修改开关设备的适配。</p></li>
 </ol>
+
+<pre><code class="language-python">   async def async_turn_on(self, **kwargs):
+        &quot;&quot;&quot;Turn the device on.
+        This method is a coroutine.
+        &quot;&quot;&quot;
+        _LOGGER.debug(&quot;payload_on data is %s, type: %s&quot;, self._config[CONF_PAYLOAD_ON],type(self._config[CONF_PAYLOAD_ON]))
+        import struct
+        payload = self._config[CONF_PAYLOAD_ON]
+        if (payload == &quot;deye_on&quot;):
+            payload = struct.pack('10b', 8,2,1,0,30,0,0,0,0,0)
+        mqtt.async_publish(
+            self.hass,
+            self._config[CONF_COMMAND_TOPIC],
+            payload,
+            self._config[CONF_QOS],
+            self._config[CONF_RETAIN],
+        )
+        if self._optimistic:
+            # Optimistically assume that switch has changed state.
+            self._state = True
+            self.async_write_ha_state()
+
+    async def async_turn_off(self, **kwargs):
+        &quot;&quot;&quot;Turn the device off.
+
+        This method is a coroutine.
+        &quot;&quot;&quot;
+        _LOGGER.debug(&quot;payload_off data is %s, type: %s&quot;, self._config[CONF_PAYLOAD_OFF], type(self._config[CONF_PAYLOAD_OFF]))
+        payload = self._config[CONF_PAYLOAD_OFF]
+        import struct
+        if (payload == &quot;deye_off&quot;):
+            payload = struct.pack('10b', 8,2,0,0,30,0,0,0,0,0)
+        mqtt.async_publish(
+            self.hass,
+            self._config[CONF_COMMAND_TOPIC],
+            payload,
+            self._config[CONF_QOS],
+            self._config[CONF_RETAIN],
+        )
+        if self._optimistic:
+            # Optimistically assume that switch has changed state.
+            self._state = False
+            self.async_write_ha_state()
+</code></pre>
+
+<ol>
+<li>修改状态监听回调函数，正确监听开关的真实状态。</li>
+</ol>
+
+<pre><code class="language-python">        @callback
+        @log_messages(self.hass, self.entity_id)
+        def state_message_received(msg):
+            &quot;&quot;&quot;Handle new MQTT state messages.&quot;&quot;&quot;
+            payload = msg.payload
+            if (self._config[CONF_NAME].startswith('deye')):
+                import json
+                data = json.loads(payload)['data'][4:6]
+                _LOGGER.debug(&quot;receive payload data is %s, switch data %s&quot;, json.loads(payload)['data'], data)
+                if (data == '00'):
+                    self._state = False
+                elif (data == '81'):
+                    self._state = True
+            else:
+                if template is not None:
+                    payload = template.async_render_with_possible_json_value(payload)
+                if payload == self._state_on:
+                    self._state = True
+                elif payload == self._state_off:
+                    self._state = False
+
+            self.async_write_ha_state()
+</code></pre>
+
+<ol>
+<li>增加配置，修改configuration.yaml</li>
+</ol>
+
+<p>增加mqtt配置。</p>
+
+<pre><code class="language-yaml">mqtt:
+  broker: xxxxxxxxxxxxxxxx.mqtt.iot.gz.baidubce.com
+  port: 1883
+  client_id: xxxxxxxxxxxxxxxxxxxxx
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+</code></pre>
+
+<p>增加switch配置。</p>
+
+<pre><code class="language-yaml">switch:
+  - platform: mqtt
+    name: deye
+    state_topic: xxxxxxxxx/xxxxxxxxxxxxx/xxxxxxxxxxxxxxxx/status/hex
+    command_topic: xxxxxxxxx/xxxxxxxxxxxxx/xxxxxxxxxxxxxxxx/command/hex
+    payload_on: deye_on
+    payload_off: deye_off
+</code></pre>
+
+<ol>
+<li><p>重启HA</p></li>
+
+<li><p>增加自动化</p></li>
+</ol>
+
+<p><img src="https://cdn.jsdelivr.net/gh/yongman/i@img/picgo/20201112171908.png" alt="" /></p>
+
+<p><img src="https://cdn.jsdelivr.net/gh/yongman/i@img/picgo/20201112171936.png" alt="" /></p>
+
+<h4 id="3-搞定">3. 搞定</h4>
+
+<p><img src="https://cdn.jsdelivr.net/gh/yongman/i@img/picgo/20201112172028.png" alt="" /></p>
 
     </div>
 
@@ -435,7 +599,7 @@ it is silently truncated to SOMAXCONN.
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-      2020-05-18
+      2020-11-12
       
     </span>
   </p>
@@ -452,30 +616,16 @@ it is silently truncated to SOMAXCONN.
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://xiking.win/tags/linux/">linux</a>
-          <a href="https://xiking.win/tags/kernel/">kernel</a>
+          <a href="https://xiking.win/tags/homeassistant/">homeassistant</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/2020/11/12/3-deye-dehumidifer-add-to-homeassistant/">
-            
-            <i class="iconfont">
-              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
-  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="18" height="18">
-  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
-</svg>
-
-            </i>
-            <span class="prev-text nav-default">德业除湿机接入HomeAssistant</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
         
-          <a class="next" href="/2020/05/15/1-linux-network-multiqueue/">
-            <span class="next-text nav-default">Linux网卡多队列实现</span>
+          <a class="next" href="/2020/05/18/2-linux-kernel-net-packet-dropped/">
+            <span class="next-text nav-default">记一次线上Linux网卡丢包问题排查</span>
             <span class="prev-text nav-mobile">Next</span>
             
             <i class="iconfont">
@@ -510,7 +660,7 @@ it is silently truncated to SOMAXCONN.
   <div id="disqus_thread"></div>
   <script type="text/javascript">
     var disqus_config = function () {
-      this.page.url = "https://xiking.win/2020/05/18/2-linux-kernel-net-packet-dropped/";
+      this.page.url = "https://xiking.win/2020/11/12/3-deye-dehumidifer-add-to-homeassistant/";
     };
     function load_disqus() {
       

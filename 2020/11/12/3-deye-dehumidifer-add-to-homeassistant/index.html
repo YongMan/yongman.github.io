@@ -72,7 +72,7 @@
 
 <meta itemprop="datePublished" content="2020-11-12T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-11-12T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1777">
+<meta itemprop="wordCount" content="1789">
 
 
 
@@ -470,11 +470,9 @@ payload = struct.pack('10b', 8,2,0,0,30,0,0,0,0,0) // 关闭开关控制数据
 
 <p>homeassistant对于mqtt的设备已经支持，只是目前的mqtt设备发送的控制payload无法通过yaml配置二进制数据，只能进行二次开发。</p>
 
-<ol>
-<li><p>复制components中的mqtt模块到custom_components，系统启动时会优先在custom_components中加载mqtt模块，覆盖系统自带的mqtt集成模块。</p></li>
+<p><strong>1.复制components中的mqtt模块到custom_components，系统启动时会优先在custom_components中加载mqtt模块，覆盖系统自带的mqtt集成模块。</strong></p>
 
-<li><p>需要增加对deye设备二进制数据的支持，在mqtt的switch.py设备实现中修改开关设备的适配。</p></li>
-</ol>
+<p><strong>2.需要增加对deye设备二进制数据的支持，在mqtt的switch.py设备实现中修改开关设备的适配。</strong></p>
 
 <pre><code class="language-python">   async def async_turn_on(self, **kwargs):
         &quot;&quot;&quot;Turn the device on.
@@ -520,9 +518,7 @@ payload = struct.pack('10b', 8,2,0,0,30,0,0,0,0,0) // 关闭开关控制数据
             self.async_write_ha_state()
 </code></pre>
 
-<ol>
-<li>修改状态监听回调函数，正确监听开关的真实状态。</li>
-</ol>
+<p><strong>3.修改状态监听回调函数，正确监听开关的真实状态。</strong></p>
 
 <pre><code class="language-python">        @callback
         @log_messages(self.hass, self.entity_id)
@@ -548,9 +544,7 @@ payload = struct.pack('10b', 8,2,0,0,30,0,0,0,0,0) // 关闭开关控制数据
             self.async_write_ha_state()
 </code></pre>
 
-<ol>
-<li>增加配置，修改configuration.yaml</li>
-</ol>
+<p><strong>4.增加配置，修改configuration.yaml</strong></p>
 
 <p>增加mqtt配置。</p>
 
@@ -573,11 +567,9 @@ payload = struct.pack('10b', 8,2,0,0,30,0,0,0,0,0) // 关闭开关控制数据
     payload_off: deye_off
 </code></pre>
 
-<ol>
-<li><p>重启HA</p></li>
+<p><strong>5.重启HA</strong></p>
 
-<li><p>增加自动化</p></li>
-</ol>
+<p><strong>6.增加自动化</strong></p>
 
 <p><img src="https://cdn.jsdelivr.net/gh/yongman/i@img/picgo/20201112171908.png" alt="" /></p>
 

@@ -157,11 +157,9 @@ payload = struct.pack(&#39;10b&#39;, 8,2,0,0,30,0,0,0,0,0) // 关闭开关控制
 
 &lt;p&gt;homeassistant对于mqtt的设备已经支持，只是目前的mqtt设备发送的控制payload无法通过yaml配置二进制数据，只能进行二次开发。&lt;/p&gt;
 
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;复制components中的mqtt模块到custom_components，系统启动时会优先在custom_components中加载mqtt模块，覆盖系统自带的mqtt集成模块。&lt;/p&gt;&lt;/li&gt;
+&lt;p&gt;&lt;strong&gt;1.复制components中的mqtt模块到custom_components，系统启动时会优先在custom_components中加载mqtt模块，覆盖系统自带的mqtt集成模块。&lt;/strong&gt;&lt;/p&gt;
 
-&lt;li&gt;&lt;p&gt;需要增加对deye设备二进制数据的支持，在mqtt的switch.py设备实现中修改开关设备的适配。&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;2.需要增加对deye设备二进制数据的支持，在mqtt的switch.py设备实现中修改开关设备的适配。&lt;/strong&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;   async def async_turn_on(self, **kwargs):
         &amp;quot;&amp;quot;&amp;quot;Turn the device on.
@@ -207,9 +205,7 @@ payload = struct.pack(&#39;10b&#39;, 8,2,0,0,30,0,0,0,0,0) // 关闭开关控制
             self.async_write_ha_state()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;ol&gt;
-&lt;li&gt;修改状态监听回调函数，正确监听开关的真实状态。&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;3.修改状态监听回调函数，正确监听开关的真实状态。&lt;/strong&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;        @callback
         @log_messages(self.hass, self.entity_id)
@@ -235,9 +231,7 @@ payload = struct.pack(&#39;10b&#39;, 8,2,0,0,30,0,0,0,0,0) // 关闭开关控制
             self.async_write_ha_state()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;ol&gt;
-&lt;li&gt;增加配置，修改configuration.yaml&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;4.增加配置，修改configuration.yaml&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;增加mqtt配置。&lt;/p&gt;
 
@@ -260,11 +254,9 @@ payload = struct.pack(&#39;10b&#39;, 8,2,0,0,30,0,0,0,0,0) // 关闭开关控制
     payload_off: deye_off
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;重启HA&lt;/p&gt;&lt;/li&gt;
+&lt;p&gt;&lt;strong&gt;5.重启HA&lt;/strong&gt;&lt;/p&gt;
 
-&lt;li&gt;&lt;p&gt;增加自动化&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;6.增加自动化&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/yongman/i@img/picgo/20201112171908.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 

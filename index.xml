@@ -243,7 +243,7 @@ payload = struct.pack(&#39;10b&#39;, 8,2,0,0,30,0,0,0,0,0) // 关闭开关控制
   password: !secret mqtt_password
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;增加switch配置。&lt;/p&gt;
+&lt;p&gt;增加switch配置，其中topic的名称就是mqttinfo中的&lt;code&gt;loginname/deviceid/status/hex&lt;/code&gt;和&lt;code&gt;loginname/deviceid/command/hex&lt;/code&gt;。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;switch:
   - platform: mqtt

@@ -72,7 +72,7 @@
 
 <meta itemprop="datePublished" content="2020-11-12T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-11-12T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1872">
+<meta itemprop="wordCount" content="1900">
 
 
 
@@ -556,7 +556,9 @@ payload = struct.pack('10b', 8,2,0,0,30,0,0,0,0,0) // 关闭开关控制数据
   password: !secret mqtt_password
 </code></pre>
 
-<p>增加switch配置，其中topic的名称就是mqttinfo中的<code>loginname/deviceid/status/hex</code>和<code>loginname/deviceid/command/hex</code>。</p>
+<p>增加switch配置，其中topic的名称就是mqttinfo中的<code>mqtt_endpoint/productid/deviceid/status/hex</code>和<code>mqtt_endpoint/productid/deviceid/command/hex</code>。</p>
+
+<p><img src="https://cdn.jsdelivr.net/gh/yongman/i@img/picgo/20201219151502.png" alt="" /></p>
 
 <pre><code class="language-yaml">switch:
   - platform: mqtt

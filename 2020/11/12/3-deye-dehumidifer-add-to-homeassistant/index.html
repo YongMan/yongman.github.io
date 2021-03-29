@@ -72,7 +72,7 @@
 
 <meta itemprop="datePublished" content="2020-11-12T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-11-12T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1929">
+<meta itemprop="wordCount" content="2083">
 
 
 
@@ -584,6 +584,11 @@ payload = struct.pack('10b', 8,2,0,0,30,0,0,0,0,0) // 关闭开关控制数据
 <h4 id="3-搞定">3. 搞定</h4>
 
 <p><img src="https://cdn.jsdelivr.net/gh/yongman/i@img/picgo/20201112172028.png" alt="" /></p>
+
+<p><strong>更新</strong></p>
+
+<p>更新homeassistant到<code>2021.3.4</code>版本后mqtt不兼容，需要从<code>2021.3.4</code>版本mqtt中进行二次更改，由于mqtt publish服务的参数类型变化，原来的二进制payload方式失效，将该部分逻辑从<code>switch.py</code>转移到<code>__init__.py</code>中，具体可以看已经修改过的mqtt代码。
+<a href="https://github.com/yongman/homeassistant-components/tree/master/mqtt">https://github.com/yongman/homeassistant-components/tree/master/mqtt</a></p>
 
     </div>
 

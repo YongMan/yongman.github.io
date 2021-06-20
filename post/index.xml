@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>yongman</copyright>
-    <lastBuildDate>Thu, 12 Nov 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 20 Jun 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://xiking.win/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>抓包获取源地址实现IPTV任意设备播放</title>
+      <link>https://xiking.win/2021/06/20/4-use-iptv-in-multiple-devices/</link>
+      <pubDate>Sun, 20 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://xiking.win/2021/06/20/4-use-iptv-in-multiple-devices/</guid>
+      <description>一般IPTV只能实现单个设备播放，一个宽带也只能接入一个IPTV，如果加中有多个设备需要同时播放电视直播，就无法实现了。 当然可以通过在网上找</description>
+    </item>
     
     <item>
       <title>德业除湿机接入HomeAssistant</title>

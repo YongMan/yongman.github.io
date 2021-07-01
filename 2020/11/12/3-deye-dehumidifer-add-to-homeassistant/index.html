@@ -72,7 +72,7 @@
 
 <meta itemprop="datePublished" content="2020-11-12T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-11-12T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="2083">
+<meta itemprop="wordCount" content="2120">
 
 
 
@@ -472,7 +472,9 @@ payload = struct.pack('10b', 8,2,0,0,30,0,0,0,0,0) // 关闭开关控制数据
 
 <h4 id="2-集成到homeassistant">2. 集成到homeassistant</h4>
 
-<p>homeassistant对于mqtt的设备已经支持，只是目前的mqtt设备发送的控制payload无法通过yaml配置二进制数据，只能进行二次开发。</p>
+<p>homeassistant对于mqtt的设备已经支持，<del>只是目前的mqtt设备发送的控制payload无法通过yaml配置二进制数据，只能进行二次开发</del>。</p>
+
+<p>德业TA22型号除湿机可以参考issue， <a href="https://github.com/yongman/homeassistant-components/issues/2">https://github.com/yongman/homeassistant-components/issues/2</a> 可以不用修改mqtt组件源码。</p>
 
 <p><strong>1.复制components中的mqtt模块到custom_components，系统启动时会优先在custom_components中加载mqtt模块，覆盖系统自带的mqtt集成模块。</strong></p>
 
